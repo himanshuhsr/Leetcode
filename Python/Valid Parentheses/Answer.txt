@@ -1,0 +1,23 @@
+class Solution:
+    def isValid(self, s: str) -> bool:
+        # Create a stack to store or keep track of opening brackets
+        stack = []
+
+        # Create a hash map for storing the mapping of each closing to opening brackets.
+        bracket = {')': '(', '}' : '{', ']' : '['}
+
+        # Iterate over the string
+        for x in s:
+            # Check character is closing bracket
+            if(x in bracket):
+                 # Check if stack is empty or not and pop the last element when stack is not empty
+                top = stack.pop() if stack else '#'
+            
+                # Check the top element with bracket hash map for their pair
+                if bracket[x] != top:
+                    return False
+            # When character is opening bracket
+            else:
+                stack.append(x)
+        # In the end if stack is empty then we have a valid expression.
+        return not stack
